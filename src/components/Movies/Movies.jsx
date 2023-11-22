@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 import css from './Movies.module.css';
@@ -17,7 +18,7 @@ export const Movies = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`
       );
       setMovies(response.data.results);

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 
@@ -11,11 +12,11 @@ export const Reviews = () => {
   useEffect(() => {
     const fetchMovieReviews = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${apiKey}&language=en-US`
         );
-        const data = await response.json();
-        setMovieReviews(data.results);
+        
+        setMovieReviews(response.data.results);
       } catch (error) {
         console.error('Error fetching movie reviews:', error);
       }

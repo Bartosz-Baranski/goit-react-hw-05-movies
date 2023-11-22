@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { useParams, useLocation, Link, NavLink } from 'react-router-dom';
@@ -15,7 +16,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 export const MoviesDetails = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
   const apiKey = '0ff4fc9e76b445d056f12e20a2c7c06f';
@@ -23,18 +24,18 @@ export const MoviesDetails = () => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
         );
-        const data = await response.json();
-        setMovieDetails(data);
+
+        setMovieDetails(response.data);
       } catch (error) {
         console.error('Error fetching movie details:', error);
       }
     };
 
     fetchMovieDetails();
-  }, [id]);
+  }, [movieId]);
 
   const navigate = useNavigate();
 
@@ -101,7 +102,7 @@ export const MoviesDetails = () => {
             <StyledLink
               className={css.homeLink}
               to={{
-                pathname: `/movies/${id}/cast`,
+                pathname: `/movies/${movieId}/cast`,
               }}
             >
               Cast
@@ -111,7 +112,7 @@ export const MoviesDetails = () => {
             <StyledLink
               className={css.homeLink}
               to={{
-                pathname: `/movies/${id}/reviews`,
+                pathname: `/movies/${movieId}/reviews`,
               }}
             >
               Reviews
@@ -119,7 +120,7 @@ export const MoviesDetails = () => {
           </li>
         </ul>
       </nav>
-      <Outlet context={id} />
+      <Outlet context={movieId} />
     </div>
   );
 };
