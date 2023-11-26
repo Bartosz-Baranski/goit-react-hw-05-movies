@@ -16,7 +16,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 export const MoviesDetails = () => {
-  const { movieId } = useParams();
+  const { id: movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
   const apiKey = '0ff4fc9e76b445d056f12e20a2c7c06f';
@@ -25,7 +25,7 @@ export const MoviesDetails = () => {
     const fetchMovieDetails = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
         );
 
         setMovieDetails(response.data);

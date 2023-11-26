@@ -14,7 +14,7 @@ export const Cast = () => {
     const fetchMovieCredits = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
         );
         setMovieActors(response.data.cast);
       } catch (error) {

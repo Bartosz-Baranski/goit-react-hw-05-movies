@@ -13,7 +13,7 @@ export const Reviews = () => {
     const fetchMovieReviews = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${apiKey}&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${apiKey}`
         );
         
         setMovieReviews(response.data.results);

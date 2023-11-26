@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
 import css from './Home.module.css';
 
 export const Home = () => {
@@ -13,7 +12,7 @@ export const Home = () => {
     const fetchTrendingMovies = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
         );
         setTrendingMovies(response.data.results);
       } catch (error) {
@@ -28,8 +27,8 @@ export const Home = () => {
       <div className={css.trending_box}>
         <ul>
           {trendingMovies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+            <li key={movie.id} className={css.movie_item}>
+              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
             </li>
           ))}
         </ul>

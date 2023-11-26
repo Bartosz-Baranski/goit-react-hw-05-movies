@@ -1,0 +1,11 @@
+.header {
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.homeNav {
+  display: flex;
+}
+.homeLink {
+  padding: 10px;
+  text-decoration: none;
+}
